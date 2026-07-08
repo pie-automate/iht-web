@@ -308,7 +308,7 @@
     <a class="logo" href="#top"><span class="logo-mark">▸</span> Indie Hacker Tycoon</a>
     <div class="nav-actions">
       <button class="icon-btn" id="theme" aria-label="Toggle theme" title="Toggle light/dark">☾</button>
-      <a class="btn btn-primary" data-tf href="#join">Join the beta</a>
+      <a class="btn btn-primary" data-tf href="#join">Get the game</a>
     </div>
   </div>
 </nav>
@@ -327,10 +327,10 @@
         No team. No VC. Just you, your energy, and the grind. <b>Marketing isn't a menu — it's the whole game.</b>
       </p>
       <div class="hero-cta reveal" style="--d:0.25s">
-        <a class="btn btn-primary" data-tf href="#join" style="font-size:16px; padding:15px 28px;">Join the TestFlight beta →</a>
+        <a class="btn btn-primary" data-tf href="#join" style="font-size:16px; padding:15px 28px;">Download on the App Store →</a>
         <div class="trust">
-          <span><span class="dot"></span> Free on iOS</span>
-          <span><span class="dot"></span> TestFlight beta soon</span>
+          <span><span class="dot"></span> Out now — free on iOS</span>
+          <span><span class="dot"></span> One-time Pro unlock, no subscription</span>
           <span><span class="dot"></span> No timers, no energy-for-cash</span>
         </div>
       </div>
@@ -441,7 +441,7 @@
         Marketing lands next month. Money rolls in over time. Skills quietly reveal what you couldn't read before.
         It's the BitLife "age up" loop — but the life is a startup, and the suspense is whether your bet pays off.
       </p>
-      <a class="btn btn-ghost" href="#join" style="margin-top:24px;">Get the launch drop →</a>
+      <a class="btn btn-ghost" href="#join" style="margin-top:24px;">Get the game →</a>
     </div>
     <div class="feedcard reveal">
       <div class="bar"><i></i><i></i><i></i></div>
@@ -462,14 +462,13 @@
   <div class="wrap">
     <div class="cta-final reveal">
       <div class="glow teal" style="opacity:0.22;top:auto;bottom:-120px;right:30%;"></div>
-      <span class="eyebrow">Be there at launch</span>
+      <span class="eyebrow">Out now on iOS</span>
       <h2 style="margin-top:12px;">Quit your job (in the game).</h2>
-      <p>The beta installs straight from TestFlight — no waitlist, no email. Tap in, ship your first app, try not to go broke.</p>
-      <a class="btn btn-primary" data-tf href="#" style="font-size:16px; padding:15px 30px;">Join the TestFlight beta →</a>
-      <div class="form-note" id="foot-note">Free · iOS · up to 10,000 testers.</div>
+      <p>Free on the App Store — no waitlist, no signup. Tap in, ship your first app, try not to go broke.</p>
+      <a class="btn btn-primary" data-tf href="#" style="font-size:16px; padding:15px 30px;">Download on the App Store →</a>
+      <div class="form-note" id="foot-note">Free · iOS · one-time Pro unlock, no subscription.</div>
       <div class="badges">
-        <span class="badge">  App Store <span class="soon">SOON</span></span>
-        <span class="badge">✈ TestFlight <span class="soon">SOON</span></span>
+        <span class="badge">  App Store <span class="soon">OUT NOW</span></span>
       </div>
     </div>
   </div>
@@ -507,19 +506,12 @@
     document.querySelectorAll('.hero .reveal').forEach(function (el) { el.classList.add('in'); });
   })();
 
-  // ===== TestFlight CTA =====
-  // Paste the public TestFlight link here when the beta is live, then redeploy.
-  // It looks like: https://testflight.apple.com/join/XXXXXXXX
-  var TESTFLIGHT_URL = "https://testflight.apple.com/join/acGJHAFc";
+  // ===== App Store CTA =====
+  // The game is live — every [data-tf] link points at the App Store listing.
+  var APP_STORE_URL = "https://apps.apple.com/app/indie-hacker-tycoon/id6783726915";
 
   document.querySelectorAll('[data-tf]').forEach(function (a) {
-    if (TESTFLIGHT_URL) {
-      a.href = TESTFLIGHT_URL; a.target = "_blank"; a.rel = "noopener";
-    } else {
-      a.textContent = "TestFlight beta — opening soon";
-      a.classList.add('disabled');
-      a.removeAttribute('href');
-    }
+    a.href = APP_STORE_URL; a.target = "_blank"; a.rel = "noopener";
   });
 </script>
 </body>
