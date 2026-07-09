@@ -222,6 +222,12 @@
   .section-head h2 { font-size: clamp(30px, 4.2vw, 46px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.05; }
   .section-head p { color: var(--text-secondary); margin-top: 16px; font-size: 17px; max-width: 34em; }
 
+  /* real gameplay shots */
+  .shots-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 44px; }
+  .shots-grid figure { margin: 0; }
+  .shots-grid img { width: 100%; height: auto; display: block; border-radius: 22px; border: 1px solid var(--border); }
+  .shots-grid figcaption { font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary); margin-top: 10px; text-align: center; letter-spacing: 0.04em; text-transform: uppercase; }
+
   /* "what is it" strip */
   .strip { border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); background: var(--bg-subtle); }
   .strip-inner { padding: 56px 0; display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: center; }
@@ -297,6 +303,7 @@
     .feature.big { grid-column: span 1; }
     .section-pad { padding: 84px 0; }
     .runshow .feedcard { order: 2; }
+    .shots-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   }
 </style>
 <noscript><style>.reveal{opacity:1;transform:none}.mask>*{transform:none}</style></noscript>
@@ -329,8 +336,8 @@
       <div class="hero-cta reveal" style="--d:0.25s">
         <a class="btn btn-primary" data-tf href="#join" style="font-size:16px; padding:15px 28px;">Download on the App Store →</a>
         <div class="trust">
-          <span><span class="dot"></span> Out now — free on iOS</span>
-          <span><span class="dot"></span> One-time Pro unlock, no subscription</span>
+          <span><span class="dot"></span> Free to start — out now on iOS</span>
+          <span><span class="dot"></span> Pro is $6.99 once: everything unlocked, ads gone</span>
           <span><span class="dot"></span> No timers, no energy-for-cash</span>
         </div>
       </div>
@@ -453,6 +460,35 @@
         <div class="bf"><div class="ic">🤝</div><div class="tx"><b>Sold</b> SideProject Pro · <span class="pos">+$9,240</span></div></div>
         <div class="bf"><div class="ic">🏆</div><div class="tx"><b>Financial freedom — you did it.</b></div></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= REAL GAMEPLAY ======================= -->
+<section class="section-pad" style="padding-top:24px;">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Straight from the game</span>
+      <h2>This is what the grind looks like.</h2>
+      <p>No mockups here — four real screens from a real run. Configure a build, work the channels, watch your back, pick what winning even means.</p>
+    </div>
+    <div class="shots-grid reveal">
+      <figure>
+        <img src="shots/build.png" alt="The app configurator — pick a genre, audience, and dev type" loading="lazy" width="560" height="1131">
+        <figcaption>Build</figcaption>
+      </figure>
+      <figure>
+        <img src="shots/market.png" alt="The marketing board — channels, knacks, and saturation" loading="lazy" width="560" height="1131">
+        <figcaption>Market</figcaption>
+      </figure>
+      <figure>
+        <img src="shots/rival.png" alt="The competitor panel — you versus the rival, same race" loading="lazy" width="560" height="1131">
+        <figcaption>Outrun the rival</figcaption>
+      </figure>
+      <figure>
+        <img src="shots/ambitions.png" alt="Choose your ambition — five different ways to win a run" loading="lazy" width="560" height="1131">
+        <figcaption>Pick your win</figcaption>
+      </figure>
     </div>
   </div>
 </section>
