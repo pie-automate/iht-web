@@ -222,6 +222,10 @@
   .section-head h2 { font-size: clamp(30px, 4.2vw, 46px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.05; }
   .section-head p { color: var(--text-secondary); margin-top: 16px; font-size: 17px; max-width: 34em; }
 
+  /* trailer */
+  .trailer-box { margin-top: 44px; border-radius: 22px; border: 1px solid var(--border); overflow: hidden; background: #0e131a; }
+  .trailer-box video { display: block; width: 100%; height: auto; }
+
   /* real gameplay shots */
   .shots-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 44px; }
   .shots-grid figure { margin: 0; }
@@ -460,6 +464,20 @@
         <div class="bf"><div class="ic">🤝</div><div class="tx"><b>Sold</b> SideProject Pro · <span class="pos">+$9,240</span></div></div>
         <div class="bf"><div class="ic">🏆</div><div class="tx"><b>Financial freedom — you did it.</b></div></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= TRAILER ======================= -->
+<section class="section-pad" style="padding-bottom:24px;">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">The trailer</span>
+      <h2>One run. 35 seconds.</h2>
+      <p>A whole founder life — shipping, going ramen profitable, getting copycatted, winning anyway — compressed.</p>
+    </div>
+    <div class="trailer-box reveal">
+      <video controls playsinline preload="none" poster="media/trailer-poster.jpg" src="media/trailer.mp4"></video>
     </div>
   </div>
 </section>
