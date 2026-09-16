@@ -6,6 +6,8 @@
 <title>Indie Hacker Tycoon — quit your job, ship apps, get rich or go broke</title>
 <meta name="description" content="A satirical solo-founder career sim. Reach $5,000 MRR before the runway runs out. Marketing isn't a menu — it's the whole game. iOS, free." />
 <meta name="theme-color" content="#0c1118" />
+<link rel="icon" type="image/png" sizes="64x64" href="media/icon-64.png" />
+<link rel="apple-touch-icon" href="media/apple-touch-icon.png" />
 <!-- Open Graph / social -->
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Indie Hacker Tycoon" />
@@ -130,10 +132,7 @@
   .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
   .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
   .logo-mark {
-    width: 30px; height: 30px; border-radius: var(--r-xs);
-    background: linear-gradient(150deg, var(--brand-bright), var(--brand));
-    color: var(--on-brand); display: grid; place-items: center;
-    font-family: var(--font-mono); font-weight: 700; font-size: 16px;
+    width: 30px; height: 30px; border-radius: var(--r-xs); display: block;
     box-shadow: 0 0 0 1px color-mix(in oklch, var(--brand) 40%, transparent);
   }
   .nav-actions { display: flex; align-items: center; gap: 8px; }
@@ -316,7 +315,7 @@
 
 <nav>
   <div class="wrap nav-inner">
-    <a class="logo" href="#top"><span class="logo-mark">▸</span> Indie Hacker Tycoon</a>
+    <a class="logo" href="#top"><img class="logo-mark" src="media/icon-64.png" alt="" width="30" height="30" /> Indie Hacker Tycoon</a>
     <div class="nav-actions">
       <button class="icon-btn" id="theme" aria-label="Toggle theme" title="Toggle light/dark">☾</button>
       <a class="btn btn-primary" data-tf href="#join">Get the game</a>
@@ -530,7 +529,7 @@
 
 <footer>
   <div class="wrap foot-inner">
-    <a class="logo" href="#top"><span class="logo-mark">▸</span> Indie Hacker Tycoon</a>
+    <a class="logo" href="#top"><img class="logo-mark" src="media/icon-64.png" alt="" width="30" height="30" /> Indie Hacker Tycoon</a>
     <p class="foot-mono"><a href="/press/" style="color:inherit;">Press kit</a> · Built in public, obviously. © 2026</p>
   </div>
 </footer>
