@@ -563,6 +563,17 @@
   // The game is live — every [data-tf] link points at the App Store listing.
   var APP_STORE_URL = "https://apps.apple.com/app/indie-hacker-tycoon/id6783726915";
 
+  // v1.4 — a post shared from the game links here as ?s=share. A valid tag turns the App Store
+  // links into an Apple campaign link (pt = the provider token, ct = the tag), so App Store
+  // Connect → App Analytics counts the page views and installs that came from shares. No cookies,
+  // no storage, no requests: Apple does the counting. No s, or a malformed one: the page is as before.
+  var APP_STORE_PT = "128525627"; // public: it appears in every campaign link
+  var shareTag = new URLSearchParams(location.search).get("s");
+  if (shareTag !== null && /^[a-z0-9_]{1,40}$/.test(shareTag)) {
+    APP_STORE_URL = "https://apps.apple.com/app/apple-store/id6783726915?pt=" + APP_STORE_PT +
+      "&ct=" + shareTag + "&mt=8";
+  }
+
   document.querySelectorAll('[data-tf]').forEach(function (a) {
     a.href = APP_STORE_URL; a.target = "_blank"; a.rel = "noopener";
   });
