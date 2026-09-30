@@ -225,11 +225,54 @@
   .trailer-box { margin-top: 44px; border-radius: 22px; border: 1px solid var(--border); overflow: hidden; background: #0e131a; }
   .trailer-box video { display: block; width: 100%; height: auto; }
 
-  /* real gameplay shots */
-  .shots-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 44px; }
-  .shots-grid figure { margin: 0; }
-  .shots-grid img { width: 100%; height: auto; display: block; border-radius: 22px; border: 1px solid var(--border); }
-  .shots-grid figcaption { font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary); margin-top: 10px; text-align: center; letter-spacing: 0.04em; text-transform: uppercase; }
+  /* real gameplay shots — a swipe strip that starts on the grid and bleeds off the right edge */
+  .shots-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+  .strip-nav { display: flex; gap: 8px; flex-shrink: 0; }
+  .strip-nav .icon-btn { width: 44px; height: 44px; font-size: 17px; }
+  .strip-nav .icon-btn:disabled { opacity: 0.35; cursor: default; }
+  .shots-strip {
+    --gutter: max(24px, calc((100% - var(--maxw)) / 2 + 24px));
+    display: flex; gap: 18px; margin-top: 44px; padding: 6px var(--gutter) 22px;
+    overflow-x: auto; overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter);
+    scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+  }
+  .shots-strip:focus-visible { outline: 2px solid var(--brand); outline-offset: -2px; border-radius: var(--r-sm); }
+  .shots-strip figure { flex: 0 0 clamp(236px, 22vw, 272px); margin: 0; scroll-snap-align: start; }
+  .shots-strip picture { display: block; }
+  .shots-strip img { width: 100%; height: auto; display: block; border-radius: 22px; border: 1px solid var(--border); background: var(--surface-sunken); }
+  .shots-strip figcaption { font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary); margin-top: 12px; letter-spacing: 0.04em; text-transform: uppercase; }
+  .shots-strip figcaption .n { color: var(--brand-bright); margin-right: 8px; }
+  @media (hover: none) and (pointer: coarse) { .strip-nav { display: none; } }
+
+  /* "new" marker + hero update pill */
+  .new { font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--on-brand); background: var(--brand); padding: 3px 8px; border-radius: 20px; line-height: 1.4; }
+  .update-pill {
+    display: inline-flex; align-items: center; gap: 10px; margin-bottom: 22px;
+    padding: 5px 14px 5px 5px; border: 1px solid var(--border); border-radius: 40px;
+    background: color-mix(in oklch, var(--surface) 70%, transparent);
+    font-size: 13.5px; color: var(--text-secondary); line-height: 1.35;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .update-pill:hover { border-color: var(--brand); color: var(--text); }
+
+  /* Post it */
+  .postit { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 64px; align-items: center; padding-block: 104px; }
+  .postit .lede { color: var(--text-secondary); margin-top: 18px; font-size: 17px; max-width: 32em; }
+  .postit .lede b { color: var(--text); font-weight: 600; }
+  .moments { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .moments li { font-family: var(--font-mono); font-size: 12px; color: var(--text); background: var(--surface); border: 1px solid var(--border-subtle); padding: 7px 12px; border-radius: 20px; }
+  .moments li span { color: var(--text-muted); }
+  .postit .fine { font-family: var(--font-mono); font-size: 12.5px; color: var(--text-muted); margin-top: 22px; }
+  .postit-stage { position: relative; justify-self: center; width: min(100%, 410px); }
+  .postit-card { transform: rotate(-2deg); }
+  .postit-card img { width: 100%; height: auto; display: block; border-radius: var(--r-lg); border: 1px solid var(--border); box-shadow: 0 40px 90px -30px rgba(0,0,0,0.7); }
+  .postit-btn {
+    position: absolute; left: -18px; bottom: -30px; transform: rotate(3deg);
+    font-weight: 600; font-size: 15px; padding: 11px 20px; border-radius: var(--r-sm);
+    background: var(--brand); color: var(--on-brand); box-shadow: 0 16px 40px -14px rgba(0,0,0,0.7);
+  }
+  .postit-stage .glow { top: 10%; right: -30%; opacity: 0.22; }
 
   /* "what is it" strip */
   .strip { border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); background: var(--bg-subtle); }
@@ -252,6 +295,10 @@
   .t-energy { color: var(--energy); background: color-mix(in oklch, var(--energy) 16%, transparent); }
   .t-danger { color: var(--danger-bright); background: var(--danger-surface); }
   .t-money { color: var(--money-bright); background: var(--money-surface); }
+  .t-brand { color: var(--brand-bright); background: var(--brand-surface); }
+  .t-dev { color: var(--dev); background: color-mix(in oklch, var(--dev) 16%, transparent); }
+  .feature .tag-row { display: flex; align-items: center; gap: 8px; margin-bottom: 18px; }
+  .feature .tag-row .tag { margin-bottom: 0; }
   .feature.big { grid-column: span 2; }
 
   /* run / activity feed showcase */
@@ -306,7 +353,19 @@
     .feature.big { grid-column: span 1; }
     .section-pad { padding: 84px 0; }
     .runshow .feedcard { order: 2; }
-    .shots-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .postit { grid-template-columns: 1fr; gap: 48px; padding-block: 84px 100px; }
+    .postit-stage { width: min(100%, 340px); }
+    .postit-btn { left: -8px; }
+  }
+  @media (max-width: 420px) {
+    /* the wordmark used to wrap to three lines and spill out of the 64px bar */
+    nav .logo { font-size: 14px; line-height: 1.15; gap: 9px; }
+    nav .btn { padding: 11px 16px; font-size: 14px; }
+  }
+  @media (max-width: 600px) {
+    .strip-nav { display: none; }
+    .shots-strip { gap: 14px; }
+    .shots-strip figure { flex-basis: 66vw; }
   }
 </style>
 <noscript><style>.reveal{opacity:1;transform:none}.mask>*{transform:none}</style></noscript>
@@ -328,7 +387,10 @@
   <div class="glow teal"></div>
   <div class="wrap hero-grid">
     <div>
-      <div class="reveal" style="--d:0s"><span class="eyebrow">Solo-founder career sim · iOS</span></div>
+      <div class="reveal" style="--d:0s">
+        <a class="update-pill" href="#features"><span class="new">New</span> Founder levels, badges, a leaderboard and a Post it button →</a>
+      </div>
+      <div class="reveal" style="--d:0.05s"><span class="eyebrow">Solo-founder career sim · iOS</span></div>
       <h1 class="mask">
         <span>Quit your job.<br>Ship apps.<br><span class="rich">Get rich</span> or <span class="go-broke">go broke.</span></span>
       </h1>
@@ -400,7 +462,7 @@
 </section>
 
 <!-- ======================= FEATURES (expressive) ======================= -->
-<section class="section-pad">
+<section class="section-pad" id="features">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">The whole game</span>
@@ -418,6 +480,7 @@
         <span class="tag t-energy">⚡ Burnout</span>
         <h3>You are the bottleneck</h3>
         <p>A few units of energy a month — that's it. Spend it building, marketing, or on your own health and sanity. Skip the gym for a quarter and obsession eats you alive. Rent, ramen, and lifestyle creep set your burn.</p>
+        <p>It has sound now: effects, a home loop, and a tense crunch loop that kicks in when runway drops under three months. Subtle, it is not.</p>
       </div>
       <div class="feature reveal">
         <span class="tag t-danger">✦ Chaos</span>
@@ -428,6 +491,17 @@
         <span class="tag t-money">★ Your story</span>
         <h3>Every career is a story worth telling</h3>
         <p>Negotiate an acqui-hire by reading the buyer's tells. Plateau, pivot, or sell. Then get the recap: <span class="mono" style="color:var(--text)">"18 months · 6 apps shipped · one viral hit · retired to Bali."</span> Or the other ending.</p>
+        <p>Either way, the end screen spells out what you learned — and <b style="color:var(--text)">Run it back</b> replays the same setup on a new seed.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="tag-row"><span class="tag t-brand">◎ Ambitions</span><span class="new">New</span></div>
+        <h3>Five ways to win. One of them is free.</h3>
+        <p>Hold $5k MRR for three months and you've won Lifestyle — no purchase required. Exit, Unicorn, Portfolio and Cult Following come with Pro, along with Angel Mode, the sandbox. Four founder identities to start from, and a guided first month. The rest are on you.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="tag-row"><span class="tag t-dev">▲ Career</span><span class="new">New</span></div>
+        <h3>Careers end. Your founder level doesn't.</h3>
+        <p>Twelve founder levels and ten badges follow you from career to career. One all-time Game Center leaderboard, <b style="color:var(--text)">Best run</b>: your peak MRR, ranked. Losing a career is fine. Losing your spot is personal.</p>
       </div>
     </div>
   </div>
@@ -482,36 +556,79 @@
 </section>
 
 <!-- ======================= REAL GAMEPLAY ======================= -->
-<section class="section-pad" style="padding-top:24px;">
-  <div class="wrap">
-    <div class="section-head reveal">
+<section class="section-pad" id="shots" style="padding-top:24px;">
+  <div class="wrap shots-head reveal">
+    <div class="section-head">
       <span class="eyebrow">Straight from the game</span>
       <h2>This is what the grind looks like.</h2>
-      <p>No mockups here — four real screens from a real run. Configure a build, work the channels, watch your back, pick what winning even means.</p>
+      <p>No mockups. Seven screens from real careers — the win, the build, the channels, the roast, the rival, the pivot, and the other ending.</p>
     </div>
-    <div class="shots-grid reveal">
-      <figure>
-        <img src="shots/build.png" alt="The app configurator — pick a genre, audience, and dev type" loading="lazy" width="560" height="1131">
-        <figcaption>Build</figcaption>
-      </figure>
-      <figure>
-        <img src="shots/market.png" alt="The marketing board — channels, knacks, and saturation" loading="lazy" width="560" height="1131">
-        <figcaption>Market</figcaption>
-      </figure>
-      <figure>
-        <img src="shots/rival.png" alt="The competitor panel — you versus the rival, same race" loading="lazy" width="560" height="1131">
-        <figcaption>Outrun the rival</figcaption>
-      </figure>
-      <figure>
-        <img src="shots/ambitions.png" alt="Choose your ambition — five different ways to win a run" loading="lazy" width="560" height="1131">
-        <figcaption>Pick your win</figcaption>
-      </figure>
+    <div class="strip-nav">
+      <button class="icon-btn" id="shots-prev" type="button" aria-label="Previous screenshots" aria-controls="shots-strip">←</button>
+      <button class="icon-btn" id="shots-next" type="button" aria-label="Next screenshots" aria-controls="shots-strip">→</button>
+    </div>
+  </div>
+  <div class="shots-strip reveal" id="shots-strip" tabindex="0" role="region" aria-label="Screenshots, scroll sideways">
+    <figure>
+      <picture><source type="image/webp" srcset="shots/v3/01.webp"><img src="shots/v3/01.jpg" width="600" height="1304" loading="lazy" alt="“BitLife for indie hackers.” The win screen: Financial Freedom after 20 months, $5k MRR sustained, a $7,666 peak, confetti everywhere, and Run it back and Post it buttons."></picture>
+      <figcaption><span class="n">01</span>The win</figcaption>
+    </figure>
+    <figure>
+      <picture><source type="image/webp" srcset="shots/v3/02.webp"><img src="shots/v3/02.jpg" width="600" height="1304" loading="lazy" alt="“Vibe-code it. Or wrap an API.” The app designer: pick a genre, an audience, and how you build it — Vibe, SaaS or Wrapper."></picture>
+      <figcaption><span class="n">02</span>The build</figcaption>
+    </figure>
+    <figure>
+      <picture><source type="image/webp" srcset="shots/v3/03.webp"><img src="shots/v3/03.jpg" width="600" height="1304" loading="lazy" alt="“Go viral. Or post into the void.” The marketing board: TikTok, YouTube, Twitter/X, Reddit and Hacker News, each showing its fit, trend and crowding."></picture>
+      <figcaption><span class="n">03</span>The channels</figcaption>
+    </figure>
+    <figure>
+      <picture><source type="image/webp" srcset="shots/v3/04.webp"><img src="shots/v3/04.jpg" width="600" height="1304" loading="lazy" alt="“Every milestone, roasted.” The Four Figures a Month card at $1,214 MRR, with a parody post drafted and a Post it button."></picture>
+      <figcaption><span class="n">04</span>The roast</figcaption>
+    </figure>
+    <figure>
+      <picture><source type="image/webp" srcset="shots/v3/05.webp"><img src="shots/v3/05.jpg" width="600" height="1304" loading="lazy" alt="“Beat your rival. Or buy them.” The competition panel: you at $2,976 a month against BuildBros at $9,983, with Sabotage and Acquire buttons."></picture>
+      <figcaption><span class="n">05</span>The rival</figcaption>
+    </figure>
+    <figure>
+      <picture><source type="image/webp" srcset="shots/v3/06.webp"><img src="shots/v3/06.jpg" width="600" height="1304" loading="lazy" alt="“Pivot. Refactor. Pray.” An app's page: users, MRR and quality, a pricing switch, and Pivot, v2 Relaunch and Refactor buttons."></picture>
+      <figcaption><span class="n">06</span>The pivot</figcaption>
+    </figure>
+    <figure>
+      <picture><source type="image/webp" srcset="shots/v3/07.webp"><img src="shots/v3/07.jpg" width="600" height="1304" loading="lazy" alt="“Or go broke trying.” The bankruptcy screen: the runway ran out in month 31, $1,378 short of the goal, with a new badge, Glorious Flameout."></picture>
+      <figcaption><span class="n">07</span>The other ending</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ======================= POST IT (clean band) ======================= -->
+<section class="strip" id="post-it">
+  <div class="wrap postit">
+    <div class="reveal">
+      <div class="section-head">
+        <span class="eyebrow"><span class="new" style="margin-right:10px;">New</span>Post it</span>
+        <h2>Build in public. Skip the building.</h2>
+      </div>
+      <p class="lede">Every big moment offers a <b>Post it</b> button. It writes a parody build-in-public post around your run's real MRR chart, ready to share.</p>
+      <ul class="moments" aria-label="Moments that offer Post it">
+        <li>First $1k MRR</li>
+        <li>Ramen profitable</li>
+        <li>The win</li>
+        <li>A spectacular bankruptcy <span>(after a $1k peak)</span></li>
+      </ul>
+      <p class="fine">Offered, never forced. The humblebrag is optional.</p>
+    </div>
+    <div class="postit-stage reveal">
+      <div class="glow teal"></div>
+      <div class="postit-card">
+        <picture><source type="image/webp" srcset="shots/v3/post-it-card.webp"><img src="shots/v3/post-it-card.jpg" width="840" height="1050" loading="lazy" alt="A Post it share card styled as a build-in-public post from @CozyBotHQ, 19 months in: “We hit $5k MRR and held it for 3 months. No VC. 2 burnouts. Here's everything I learned (1/47)”, above the run's MRR chart peaking at $5,480."></picture>
+      </div>
+      <span class="postit-btn" aria-hidden="true">Post it</span>
     </div>
   </div>
 </section>
 
 <!-- ======================= FINAL CTA ======================= -->
-<section class="section-pad" id="join" style="padding-top:24px;">
+<section class="section-pad" id="join" style="padding-top:96px;">
   <div class="wrap">
     <div class="cta-final reveal">
       <div class="glow teal" style="opacity:0.22;top:auto;bottom:-120px;right:30%;"></div>
@@ -557,6 +674,25 @@
     document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
     // hero reveals fire immediately on load
     document.querySelectorAll('.hero .reveal').forEach(function (el) { el.classList.add('in'); });
+  })();
+
+  // screenshot strip: arrow buttons for mouse users (touch swipes, keyboard scrolls the focused strip)
+  (function () {
+    var s = document.getElementById('shots-strip');
+    var prev = document.getElementById('shots-prev'), next = document.getElementById('shots-next');
+    if (!s || !prev || !next) return;
+    var smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function step() { var f = s.querySelector('figure'); return f ? f.getBoundingClientRect().width + 18 : 280; }
+    function go(dir) { s.scrollBy({ left: dir * step(), behavior: smooth ? 'smooth' : 'auto' }); }
+    function sync() {
+      prev.disabled = s.scrollLeft <= 2;
+      next.disabled = s.scrollLeft + s.clientWidth >= s.scrollWidth - 2;
+    }
+    prev.addEventListener('click', function () { go(-1); });
+    next.addEventListener('click', function () { go(1); });
+    s.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+    sync();
   })();
 
   // ===== App Store CTA =====
